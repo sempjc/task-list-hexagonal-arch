@@ -1,6 +1,6 @@
 import * as fs from "node:fs/promises";
 
-import { Task, TaskRepository } from "../../core/task";
+import { Task, TaskRepository } from "../../ports/task";
 
 export class LocalFileDirectoryTaskRepository implements TaskRepository {
   private storagePath = "./local-storage-data";

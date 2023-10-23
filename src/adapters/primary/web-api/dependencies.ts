@@ -5,7 +5,7 @@ import {
   RemoveTaskUseCaseInterface,
   TaskRepository,
   UpdateTaskUseCaseInterface,
-} from "../../../core/task";
+} from "../../../ports/task";
 
 import {
   AddTaskUseCase,

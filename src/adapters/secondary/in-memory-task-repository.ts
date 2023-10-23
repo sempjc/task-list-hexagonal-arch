@@ -1,4 +1,4 @@
-import { Task, TaskRepository } from "../../core/task";
+import { Task, TaskRepository } from "../../ports/task";
 
 export class InMemoryTaskRepository implements TaskRepository {
   private tasks: Task[] = [];

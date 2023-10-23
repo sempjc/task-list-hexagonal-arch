@@ -5,7 +5,7 @@ import {
   ListTaskUseCaseInterface,
   RemoveTaskUseCaseInterface,
   UpdateTaskUseCaseInterface,
-} from "../../../core/task";
+} from "../../../ports/task";
 
 export class TaskController {
   constructor(
