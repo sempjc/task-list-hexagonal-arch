@@ -1,0 +1,26 @@
+{
+  "name": "tasklist-hex-archiquecture",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "console": "ts-node ./src/adapters/primary/console/",
+    "webapi": "ts-node ./src/adapters/primary/web-api"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.20",
+    "@types/node": "^20.8.7",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.6"
+  },
+  "dependencies": {
+    "commander": "^11.1.0",
+    "express": "^4.18.2"
+  }
+}
