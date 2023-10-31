@@ -1,25 +1,26 @@
 {
-  "name": "tasklist-hex-archiquecture",
+  "name": "task-manager-with-hexagonal-arcitecture",
   "version": "1.0.0",
-  "description": "",
+  "description": "A project where I attempt to apply Hexagonal Architecture Principles in a simple Task Manager app.",
   "main": "index.js",
   "scripts": {
-    "test": "vitest",
-    "test:watch": "vitest --watch",
-    "console": "ts-node ./src/adapters/primary/console/",
-    "webapi": "ts-node ./src/adapters/primary/web-api"
+    "test": "npm run test --workspace=test",
+    "test:watch": "npm run test:watch --workspace=test",
+    "build": "",
+    "build:core": "npm run build --workspace=core-application",
+    "build:dev-repo": "npm run build --workspace=adapters/secondary/dev-repository",
+    "build:nextjs:dev": "",
+    "build:nextjs": ""
   },
-  "keywords": [],
-  "author": "",
+  "author": "sempjc",
   "license": "ISC",
-  "devDependencies": {
-    "@types/express": "^4.17.20",
-    "@types/node": "^20.8.7",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.2.2",
-    "vitest": "^0.34.6"
-  },
+  "workspaces": [
+    "core-application",
+    "adapters/secondary/dev-repository",
+    "test"
+  ],
   "dependencies": {
+    "@types/express": "^4.17.20",
     "commander": "^11.1.0",
     "express": "^4.18.2"
   }
