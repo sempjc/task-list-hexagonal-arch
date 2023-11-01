@@ -9,7 +9,9 @@ import {
 
 import { LocalFileDirectoryTaskRepository } from "dev-repository";
 
-const Repository: TaskRepository = new LocalFileDirectoryTaskRepository();
+const Repository: TaskRepository = new LocalFileDirectoryTaskRepository(
+  "../../../.data/local-storage/task"
+);
 
 const AddTask = new AddTaskUseCase(Repository);
 

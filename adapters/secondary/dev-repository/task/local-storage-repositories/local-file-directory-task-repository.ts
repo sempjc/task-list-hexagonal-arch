@@ -2,8 +2,8 @@ import * as fs from "node:fs/promises";
 import { Task, TaskRepository } from "core-application/task";
 
 export class LocalFileDirectoryTaskRepository implements TaskRepository {
-  constructor(private readonly storagePath = ".data/local-storage/task") {
-    fs.mkdir(storagePath, { recursive: true });
+  constructor(private readonly path: string) {
+    fs.mkdir(path, { recursive: true });
   }
 
   async add(
@@ -20,16 +20,20 @@ export class LocalFileDirectoryTaskRepository implements TaskRepository {
       id: new Date().getTime(),
     };
 
-    await fs.writeFile(this.filePath(newTask.id), JSON.stringify(newTask));
+    await fs.writeFile(
+      this.filePath(newTask.id),
+      JSON.stringify(newTask),
+      "utf-8"
+    );
   }
 
   async list() {
-    const files = await fs.readdir(this.storagePath);
+    const files = await fs.readdir(this.path);
 
     const tasks: Task[] = [];
 
     for (const file of files) {
-      const task = await fs.readFile(`${this.storagePath}/${file}`, "utf-8");
+      const task = await fs.readFile(`${this.path}/${file}`, "utf-8");
 
       tasks.push(JSON.parse(task));
     }
@@ -64,10 +68,10 @@ export class LocalFileDirectoryTaskRepository implements TaskRepository {
       updatedAt,
     };
 
-    await fs.writeFile(this.filePath(id), JSON.stringify(updatedTask));
+    await fs.writeFile(this.filePath(id), JSON.stringify(updatedTask), "utf-8");
   }
 
   private filePath(pathName: number | string): string {
-    return `${this.storagePath}/${pathName}.json`;
+    return `${this.path}/${pathName}.json`;
   }
 }

@@ -1,6 +1,6 @@
 import { Command } from "commander";
-import { dependencyContainer as dependency } from "./dependencies";
-import { TaskManager } from "./task-manager";
+import { dependencyContainer as dependency } from "./app/dependencies";
+import { TaskManager } from "./app/task-manager";
 
 const taskManager = new TaskManager(
   dependency.AddTask,
@@ -11,34 +11,36 @@ const taskManager = new TaskManager(
 );
 
 const program = new Command();
+program.version("0.0.1");
+
 program
-  // Program version
-  .version("0.0.1")
-
-  // Add task command
   .command("add <title>")
+  .description("Add a new task to the task manager")
   .option("-d, --description [description]")
   .option("-c --completed [completed]", "Mark task as completed", false)
-  .action(async (title, options) => await taskManager.AddTask(title, options))
+  .action(async (title, options) => await taskManager.AddTask(title, options));
 
-  // Get task by id command
+program
   .command("get <id>")
-  .action(async (id) => await taskManager.GetTask(id))
+  .description("Get a task by id")
+  .action(async (id) => await taskManager.GetTask(id));
 
-  // List all task command
+program
   .command("list")
-  .action(async () => await taskManager.ListTask())
+  .description("List all tasks")
+  .action(async () => await taskManager.ListTask());
 
-  // Remove task command
+program
   .command("remove <id>")
-  .action(async (id) => await taskManager.RemoveTask(id))
+  .description("Remove a task by id")
+  .action(async (id) => await taskManager.RemoveTask(id));
 
-  // Update a task by id command
+program
   .command("update <id>")
-  .option("-t, --title [title]")
-  .option("-d, --description [description]")
+  .description("Update a task by id")
+  .option("-t, --title [title]", "Update task title")
+  .option("-d, --description [description]", "Update task description")
   .option("-c --completed [completed]", "Mark task as completed", false)
-  .action(async (id, options) => await taskManager.UpdateTask(id, options))
+  .action(async (id, options) => await taskManager.UpdateTask(id, options));
 
-  // Parse arguments from Command Line
-  .parse(process.argv);
+program.parse(process.argv);
